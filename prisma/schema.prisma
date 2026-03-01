@@ -12,14 +12,14 @@ datasource db {
 
 model Feedback {
   id        String   @id @default(uuid())
-  name      String   @db.VarChar(255) // Stored as "Anonymous" when anonymous = true
+  name      String   @db.VarChar(255)
   message   String   @db.Text
-  rating    Int      // 1-5 stars (validated at API layer)
+  rating    Int
   anonymous Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([createdAt(sort: Desc)]) // Efficient sorting for "View All Feedback"
-  @@index([rating])               // Efficient average rating calculation
+  @@index([createdAt(sort: Desc)])
+  @@index([rating])
   @@map("feedback")
 }

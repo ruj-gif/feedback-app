@@ -10,14 +10,12 @@ A modern feedback collection app built with Next.js (App Router), Prisma, and Po
 
 ## Run locally
 
-1. **Install and configure**
+1. **Install**
    ```bash
-   cd frontend
    npm install
    ```
 2. **Environment**
-   - Copy `frontend/.env.example` to `frontend/.env.local` (or create it).
-   - Set `DATABASE_URL` to your PostgreSQL connection string (e.g. from Supabase).
+   - Create `.env` in the project root with `DATABASE_URL` set to your PostgreSQL connection string (e.g. from Supabase).
 3. **Database**
    ```bash
    npx prisma generate
@@ -31,7 +29,7 @@ A modern feedback collection app built with Next.js (App Router), Prisma, and Po
 
 ## Deploy on Vercel
 
-- Set **Root Directory** to `frontend`.
+- Leave **Root Directory** empty (use repository root).
 - Add **Environment Variable:** `DATABASE_URL` = your PostgreSQL URL.
 - Deploy from the main branch.
 
