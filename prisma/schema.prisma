@@ -1,0 +1,25 @@
+// Feedback Collection App - Database Schema
+// Based on PRD Section 6: PostgreSQL (Vercel-compatible: Neon / Supabase)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Feedback {
+  id        String   @id @default(uuid())
+  name      String   @db.VarChar(255) // Stored as "Anonymous" when anonymous = true
+  message   String   @db.Text
+  rating    Int      // 1-5 stars (validated at API layer)
+  anonymous Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)]) // Efficient sorting for "View All Feedback"
+  @@index([rating])               // Efficient average rating calculation
+  @@map("feedback")
+}
