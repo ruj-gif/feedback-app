@@ -18,8 +18,16 @@ export default function Home() {
       ]);
       const listData = await listRes.json();
       const avgData = await avgRes.json();
-      setFeedbacks(Array.isArray(listData) ? listData : []);
-      setAverageRating(typeof avgData.averageRating === "number" ? avgData.averageRating : null);
+      if (listRes.ok && Array.isArray(listData)) {
+        setFeedbacks(listData);
+      } else {
+        setFeedbacks([]);
+      }
+      if (avgRes.ok && typeof avgData.averageRating === "number") {
+        setAverageRating(avgData.averageRating);
+      } else {
+        setAverageRating(null);
+      }
     } catch {
       setFeedbacks([]);
       setAverageRating(null);
